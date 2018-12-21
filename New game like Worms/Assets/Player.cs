@@ -26,7 +26,7 @@ public class Player : MonoBehaviour {
     public float rotationMin = 0;
 
     public float power = 0;
-    public float powerMax = 5;
+    public float powerMax = 3;
 
 
     
@@ -165,7 +165,7 @@ public class Player : MonoBehaviour {
             {
                 power = powerMax;
             }
-
+            Debug.Log(power);
         }
         else
         {
