@@ -696,7 +696,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 100
+  m_Text: 
 --- !u!222 &283327150
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -971,6 +971,7 @@ Transform:
   - {fileID: 1739055541}
   - {fileID: 1402517755}
   - {fileID: 1182590549}
+  - {fileID: 1984708779}
   - {fileID: 2081670379}
   - {fileID: 2037673445}
   - {fileID: 1308210445}
@@ -1073,7 +1074,7 @@ GameObject:
   m_Component:
   - component: {fileID: 462393941}
   m_Layer: 0
-  m_Name: HealthPlayer1
+  m_Name: playerOneHealth
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1174,7 +1175,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 410633080}
-  m_RootOrder: 18
+  m_RootOrder: 19
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!136 &524752656
 CapsuleCollider:
@@ -1762,7 +1763,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 100
+  m_Text: 
 --- !u!222 &824288239
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2073,7 +2074,7 @@ RectTransform:
   - {fileID: 1638083822}
   - {fileID: 648504713}
   m_Father: {fileID: 410633080}
-  m_RootOrder: 19
+  m_RootOrder: 20
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -2286,7 +2287,7 @@ Transform:
   - {fileID: 958099354}
   - {fileID: 77156548}
   m_Father: {fileID: 410633080}
-  m_RootOrder: 17
+  m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1316646268
 Prefab:
@@ -2377,7 +2378,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1409530250}
   m_Layer: 0
-  m_Name: HealthPlayer2
+  m_Name: playerTwoHealth
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3126,6 +3127,57 @@ Transform:
   m_Father: {fileID: 2081670379}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 263.074, z: 0}
+--- !u!1001 &1984708778
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 410633080}
+    m_Modifications:
+    - target: {fileID: 4281187082139244, guid: 3079e6ceb0efb1e40a1fb1e41e83809a, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -2.5152178
+      objectReference: {fileID: 0}
+    - target: {fileID: 4281187082139244, guid: 3079e6ceb0efb1e40a1fb1e41e83809a, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -22.901
+      objectReference: {fileID: 0}
+    - target: {fileID: 4281187082139244, guid: 3079e6ceb0efb1e40a1fb1e41e83809a, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 3.6845856
+      objectReference: {fileID: 0}
+    - target: {fileID: 4281187082139244, guid: 3079e6ceb0efb1e40a1fb1e41e83809a, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4281187082139244, guid: 3079e6ceb0efb1e40a1fb1e41e83809a, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4281187082139244, guid: 3079e6ceb0efb1e40a1fb1e41e83809a, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4281187082139244, guid: 3079e6ceb0efb1e40a1fb1e41e83809a, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4281187082139244, guid: 3079e6ceb0efb1e40a1fb1e41e83809a, type: 2}
+      propertyPath: m_RootOrder
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1108145396383634, guid: 3079e6ceb0efb1e40a1fb1e41e83809a, type: 2}
+      propertyPath: m_Name
+      value: Obstacles
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3079e6ceb0efb1e40a1fb1e41e83809a, type: 2}
+  m_IsPrefabAsset: 0
+--- !u!4 &1984708779 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4281187082139244, guid: 3079e6ceb0efb1e40a1fb1e41e83809a,
+    type: 2}
+  m_PrefabInternal: {fileID: 1984708778}
 --- !u!1001 &2009786787
 Prefab:
   m_ObjectHideFlags: 0
@@ -3245,7 +3297,7 @@ Transform:
   m_LocalScale: {x: 4.751065, y: 4.751065, z: 4.751065}
   m_Children: []
   m_Father: {fileID: 410633080}
-  m_RootOrder: 16
+  m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &2038183418 stripped
 Transform:
@@ -3447,7 +3499,9 @@ MonoBehaviour:
   rotationMax: 0.5
   rotationMin: 0
   power: 0
-  powerMax: 5
+  powerMax: 2
+  playerOneHealth: {fileID: 283327149}
+  playerTwoHealth: {fileID: 824288238}
 --- !u!4 &2081670379
 Transform:
   m_ObjectHideFlags: 0
@@ -3462,7 +3516,7 @@ Transform:
   - {fileID: 1936739000}
   - {fileID: 1620167350}
   m_Father: {fileID: 410633080}
-  m_RootOrder: 15
+  m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!136 &2081670380
 CapsuleCollider:

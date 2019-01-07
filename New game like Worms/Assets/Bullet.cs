@@ -32,14 +32,17 @@ public class Bullet : MonoBehaviour {
 
             Destroy(collision.gameObject);
             Destroy(this.gameObject);
+
         }
 
         else if (collision.gameObject.name == "Player" || collision.gameObject.name == "PlayerTwo")
         {
             explosion.gameObject.transform.parent = null;
             explosion.gameObject.SetActive(true);
-
+            
             Destroy(this.gameObject);
+
+           
         }
     }
 }

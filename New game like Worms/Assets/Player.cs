@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour {
 
@@ -26,8 +27,12 @@ public class Player : MonoBehaviour {
     public float rotationMin = 0;
 
     public float power = 0;
-    public float powerMax = 3;
+    public float powerMax = 2;
 
+    public Text playerOneHealth;
+    public Text playerTwoHealth;
+
+    private int startingHealth = 100;
 
     
 
@@ -37,10 +42,16 @@ public class Player : MonoBehaviour {
         bullet.gameObject.SetActive(true);
         grenade.gameObject.SetActive(false);
         arrow.gameObject.SetActive(false);
+
+        playerOneHealth.text = "100";
+        playerTwoHealth.text = "100";
     }
 	
 	// Update is called once per frame
 	void Update () {
+
+        playerOneHealth.text = startingHealth.ToString();
+        playerTwoHealth.text = startingHealth.ToString();
 
         if (Input.GetKey(KeyCode.D))
         {
@@ -159,12 +170,32 @@ public class Player : MonoBehaviour {
         {
             arrow.gameObject.SetActive(true);
 
+
             power += Time.deltaTime;
 
-            if (power > powerMax)
+            if (power >= powerMax)
             {
                 power = powerMax;
+
+                //if (power == powerMax)
+                //{
+                //    power -= Time.deltaTime;
+                //}
             }
+            
+
+            //if (power == 0)
+            //{
+            //    power += Time.deltaTime;
+
+            //    if (power >= powerMax)
+            //    {
+            //        power -= Time.deltaTime;
+            //    }
+            //}
+
+
+
             Debug.Log(power);
         }
         else
