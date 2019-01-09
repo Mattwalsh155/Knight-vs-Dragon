@@ -7,6 +7,7 @@ TagManager:
   - obstacles
   - bullet
   - walls
+  - grenade
   layers:
   - Default
   - TransparentFX

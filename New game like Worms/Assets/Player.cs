@@ -29,12 +29,20 @@ public class Player : MonoBehaviour {
     public float power = 0;
     public float powerMax = 2;
 
-    public Text playerOneHealth;
-    public Text playerTwoHealth;
-
+    public Text playerHealth;
     private int startingHealth = 100;
 
-    
+    public Text powerShow;
+    private float startingPower = 0;
+
+    public Text currentWeapon;
+    private bool gunSelected = true;
+
+    public bool playersTurn;
+    public bool isIncreasing;
+    public bool hasShot;
+
+    public GameManager gameManager;
 
 	// Use this for initialization
 	void Start () {
@@ -43,166 +51,217 @@ public class Player : MonoBehaviour {
         grenade.gameObject.SetActive(false);
         arrow.gameObject.SetActive(false);
 
-        playerOneHealth.text = "100";
-        playerTwoHealth.text = "100";
+        playerHealth.text = startingHealth.ToString();
+
+        powerShow.text = "FirePower: " + startingPower.ToString();
+
+        currentWeapon.text = "Current Weapon: Gun";
+    }
+
+    void OnCollisionEnter(Collision other)
+    {
+        if (other.gameObject.tag == "bullet")
+        {
+            startingHealth -= 30;
+            playerHealth.text = startingHealth.ToString();
+        }
+
+        if (other.gameObject.tag == "grenade")
+        {
+            startingHealth -= 20;
+            playerHealth.text = startingHealth.ToString();
+        }
+
+        if (startingHealth <= 0)
+        {
+            gameManager.GameOver();
+        }
     }
 	
 	// Update is called once per frame
 	void Update () {
 
-        playerOneHealth.text = startingHealth.ToString();
-        playerTwoHealth.text = startingHealth.ToString();
-
-        if (Input.GetKey(KeyCode.D))
+        if (playersTurn && gameManager.isGameOver == false)
         {
-            xVelocity += 1f;
-            direction = 1;
-            pSprite.transform.localScale = new Vector3(1, 1, 1);
-            //bulletSpawn.localScale = new Vector3(1, 1, 1);
-        }
-        else if (Input.GetKey(KeyCode.A))
-        {
-            xVelocity -= 1f;
-            direction = -1;
-            pSprite.transform.localScale = new Vector3(-1, 1, 1);
-            //bulletSpawn.localScale = new Vector3(-1, 1, 1);
-        }
-        else
-        {
-            xVelocity = 0;
-        }
-
-        if (Input.GetKeyDown(KeyCode.D))
-        {
-            
-            //bulletSpawn.Rotate(new Vector3(0, , 0));
-        }
-        else if (Input.GetKeyDown(KeyCode.A))
-        {
-           // transform.Rotate(new Vector3(0, -180, 0));
-        }
-
-        if (Mathf.Abs(xVelocity) > maxSpeed)
-        {
-            xVelocity = maxSpeed * direction;
-        }
-
-        player.velocity = new Vector3(xVelocity, player.velocity.y, 0);
-		
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            isJumping = true;
-            player.AddForce(Vector3.up * 3000);
-        }
-
-        if (Input.GetKeyUp(KeyCode.F))
-        {
-
-            if (grenade.gameObject == true)
+            if (hasShot == false)
             {
-                ShootingGrenade();
 
-            }
 
-            if (bullet.gameObject == true)
-            {
-                ShootingBullet();
-
-            }
-
-            power = 0;
-        }
-        
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-           
-            bullet.gameObject.SetActive(false);
-            grenade.gameObject.SetActive(true);
-        }
-
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-           
-            bullet.gameObject.SetActive(true);
-            grenade.gameObject.SetActive(false);
-        }
-
-        if (Input.GetKey(KeyCode.W))
-        {
-            //Debug.Log("bulletSpawn.transform.rotation.x : "+ bulletSpawn.transform.rotation.x);
-            //Debug.Log("rotationMax : " + rotationMax);
-            if (bulletSpawn.transform.rotation.x > -rotationMax)
-            {
-                if(direction == 1)
+                if (Input.GetKey(KeyCode.D))
                 {
-                    bulletSpawn.Rotate(Vector3.left, 1, Space.Self);
+                    xVelocity += 1f;
+                    direction = 1;
+                    pSprite.transform.localScale = new Vector3(1, 1, 1);
+                    //bulletSpawn.localScale = new Vector3(1, 1, 1);
+                }
+                else if (Input.GetKey(KeyCode.A))
+                {
+                    xVelocity -= 1f;
+                    direction = -1;
+                    pSprite.transform.localScale = new Vector3(-1, 1, 1);
+                    //bulletSpawn.localScale = new Vector3(-1, 1, 1);
                 }
                 else
                 {
-                    bulletSpawn.Rotate(Vector3.right, 1, Space.Self);
+                    xVelocity = 0;
                 }
-                
             }
-          
-            arrow.gameObject.SetActive(true);
-        }
 
-        else if (Input.GetKey(KeyCode.S))
-        {
-            // Debug.Log(direction);
-             if (bulletSpawn.transform.rotation.x < rotationMin)
-             {
-            
-                if (direction == 1)
-                {
-                    bulletSpawn.Rotate(Vector3.right, 1, Space.Self);
-                }
-                else
-                {
-                    bulletSpawn.Rotate(Vector3.left, 1, Space.Self);
-                }
-             }
-           
-            arrow.gameObject.SetActive(true);
-          
-        }
-        else if (Input.GetKey(KeyCode.F))
-        {
-            arrow.gameObject.SetActive(true);
-
-
-            power += Time.deltaTime;
-
-            if (power >= powerMax)
+            if (Input.GetKeyDown(KeyCode.D))
             {
-                power = powerMax;
 
+                //bulletSpawn.Rotate(new Vector3(0, , 0));
+            }
+            else if (Input.GetKeyDown(KeyCode.A))
+            {
+                // transform.Rotate(new Vector3(0, -180, 0));
+            }
+
+            if (Mathf.Abs(xVelocity) > maxSpeed)
+            {
+                xVelocity = maxSpeed * direction;
+            }
+
+            player.velocity = new Vector3(xVelocity, player.velocity.y, 0);
+
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                isJumping = true;
+                player.AddForce(Vector3.up * 3000);
+            }
+
+            if (Input.GetKeyUp(KeyCode.F))
+            {
+                hasShot = true;
+
+                if (grenade.gameObject == true)
+                {
+                    ShootingGrenade();
+
+                }
+
+                if (bullet.gameObject == true)
+                {
+                    ShootingBullet();
+
+                }
+
+                power = 0;
+                powerMax = 2;
+            }
+
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+
+                bullet.gameObject.SetActive(false);
+                grenade.gameObject.SetActive(true);
+
+                gunSelected = true;
+                currentWeapon.text = "Current Weapon: Grenade";
+            }
+
+            if (Input.GetKeyDown(KeyCode.Q))
+            {
+
+                bullet.gameObject.SetActive(true);
+                grenade.gameObject.SetActive(false);
+
+                gunSelected = false;
+                currentWeapon.text = "Current Weapon: Gun";
+            }
+
+            if (Input.GetKey(KeyCode.W))
+            {
+                //Debug.Log("bulletSpawn.transform.rotation.x : "+ bulletSpawn.transform.rotation.x);
+                //Debug.Log("rotationMax : " + rotationMax);
+                if (bulletSpawn.transform.rotation.x > -rotationMax)
+                {
+                    if (direction == 1)
+                    {
+                        bulletSpawn.Rotate(Vector3.left, 1, Space.Self);
+                    }
+                    else
+                    {
+                        bulletSpawn.Rotate(Vector3.right, 1, Space.Self);
+                    }
+
+                }
+
+                arrow.gameObject.SetActive(true);
+            }
+
+            else if (Input.GetKey(KeyCode.S))
+            {
+                // Debug.Log(direction);
+                if (bulletSpawn.transform.rotation.x < rotationMin)
+                {
+
+                    if (direction == 1)
+                    {
+                        bulletSpawn.Rotate(Vector3.right, 1, Space.Self);
+                    }
+                    else
+                    {
+                        bulletSpawn.Rotate(Vector3.left, 1, Space.Self);
+                    }
+                }
+
+                arrow.gameObject.SetActive(true);
+
+            }
+            else if (Input.GetKey(KeyCode.F))
+            {
+                arrow.gameObject.SetActive(true);
+                startingPower = power;
+                powerShow.text = "FirePower: " + startingPower.ToString("f3");
+
+                if (power >= 0 && isIncreasing == true)
+                {
+                    power += Time.deltaTime;
+                }
+                if (power >= powerMax)
+                {
+                    isIncreasing = false;
+                    power = powerMax;
+                   // powerMax -= Time.deltaTime;
+                }
+                if (!isIncreasing)
+                {
+                    power -= Time.deltaTime;
+                }
+
+                if (power <= 0 && isIncreasing == false)
+                {
+                    power = 0;
+                    isIncreasing = true;
+                }
+                //if (powerMax <= 0)
+                //{
+                //    powerMax = 0;
+                //    power = 0;
+                //    power += Time.deltaTime;
+                //}
                 //if (power == powerMax)
                 //{
                 //    power -= Time.deltaTime;
                 //}
+
+                //if (power == 0)
+                //{
+                //    power += Time.deltaTime;
+
+                //    if (power >= powerMax)
+                //    {
+                //        power -= Time.deltaTime;
+                //    }
+                //}
             }
-            
+            else
+            {
+                arrow.gameObject.SetActive(false);
+            }
 
-            //if (power == 0)
-            //{
-            //    power += Time.deltaTime;
-
-            //    if (power >= powerMax)
-            //    {
-            //        power -= Time.deltaTime;
-            //    }
-            //}
-
-
-
-            Debug.Log(power);
         }
-        else
-        {
-            arrow.gameObject.SetActive(false);
-        }
-
     }
 
     void ShootingBullet()
