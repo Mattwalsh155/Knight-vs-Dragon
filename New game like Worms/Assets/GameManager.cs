@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour {
 
     public int timer;
     public bool turn;
-    public enum gameStates { MENU,GAMEPLAY,PAUSE}
+    public enum gameStates { MENU,GAMEPLAY,PAUSE }
     public gameStates GameStates;
 
     public Player[] players;
@@ -40,6 +40,15 @@ public class GameManager : MonoBehaviour {
         if (Input.GetKey(KeyCode.P))
         {
             PauseGame();
+        }
+
+        if (players[0].playersTurn == true)
+        {
+            players[0].currentTurn.text = "Player 1's turn";
+        }
+        else if (players[1].playersTurn == true)
+        {
+            players[1].currentTurn.text = "Player 2's turn";
         }
 	}
 

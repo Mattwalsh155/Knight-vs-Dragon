@@ -4,12 +4,18 @@ using UnityEngine;
 
 public class ParticleSystem : MonoBehaviour {
 
-     GameObject player;
+    private Player player;
+    private Player playerTwo;
+    private GameManager gameManager;
+
+    private bool firstHit = false;
 
 	// Use this for initialization
 	void Start () {
-		
-	}
+        player = GameObject.Find("Player").GetComponent<Player>();
+        playerTwo = GameObject.Find("PlayerTwo").GetComponent<Player>();
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -22,14 +28,29 @@ public class ParticleSystem : MonoBehaviour {
         {
             Destroy(other.gameObject);
         }
-
-        else if (other.gameObject.name == "Player" || other.gameObject.name == "PlayerTwo")
+        //boolean firstHit private make false to start. wrap damage in an if statement
+        if (firstHit == false)
         {
-            //player.GetComponent<Player>().startingHealth -= 10;
-            //player.playerHealth.text = player.startingHealth.ToString();
+        
+            if (other.gameObject.name == "Player")
+            {
+                //Debug.Log("yay");
+                player.GetComponent<Player>().startingHealth -= 10;
+                player.playerHealth.text = player.startingHealth.ToString();
+                firstHit = true;
+            }
+            else if (other.gameObject.name == "PlayerTwo")
+            {
+                //Debug.Log("yay");
+                playerTwo.GetComponent<Player>().startingHealth -= 10;
+                playerTwo.playerHealth.text = playerTwo.startingHealth.ToString();
+                firstHit = true;
+            }
+        }
+        if (player.startingHealth <= 0)
+        {
+            gameManager.GameOver();
         }
 
-       //Debug.Log("yay");
-        
     }
 }

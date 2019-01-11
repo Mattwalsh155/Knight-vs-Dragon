@@ -7,6 +7,8 @@ public class Bullet : MonoBehaviour {
 
     private GameManager gameManager;
 
+    private int obstaclesHit = 0;
+
     void Start()
     {
         explosion.gameObject.SetActive(false);
@@ -53,10 +55,13 @@ public class Bullet : MonoBehaviour {
             explosion.gameObject.SetActive(true);
 
             Destroy(collision.gameObject);
+            //obstaclesHit++;
 
-            turnManager();
-            Destroy(this.gameObject);
-
+            //if (obstaclesHit >= 2)
+            //{
+                turnManager();
+                Destroy(this.gameObject);
+            //}
         }
 
         else if (collision.gameObject.name == "Player" || collision.gameObject.name == "PlayerTwo")
@@ -65,9 +70,12 @@ public class Bullet : MonoBehaviour {
             explosion.gameObject.SetActive(true);
 
             turnManager();
-            Destroy(this.gameObject);
-
-           
+            Destroy(this.gameObject);          
         }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+
     }
 }
