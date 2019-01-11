@@ -30,7 +30,7 @@ public class Player : MonoBehaviour {
     public float powerMax = 2;
 
     public Text playerHealth;
-    private int startingHealth = 100;
+    public int startingHealth;
 
     public Text powerShow;
     private float startingPower = 0;
@@ -38,15 +38,19 @@ public class Player : MonoBehaviour {
     public Text currentWeapon;
     private bool gunSelected = true;
 
+    public Text winningPlayer;
+
     public bool playersTurn;
     public bool isIncreasing;
     public bool hasShot;
 
     public GameManager gameManager;
 
+    
+
 	// Use this for initialization
 	void Start () {
-        
+        startingHealth = 100;
         bullet.gameObject.SetActive(true);
         grenade.gameObject.SetActive(false);
         arrow.gameObject.SetActive(false);
@@ -62,6 +66,7 @@ public class Player : MonoBehaviour {
     {
         if (other.gameObject.tag == "bullet")
         {
+            Debug.Log(startingHealth + " working");
             startingHealth -= 30;
             playerHealth.text = startingHealth.ToString();
         }
@@ -75,6 +80,11 @@ public class Player : MonoBehaviour {
         if (startingHealth <= 0)
         {
             gameManager.GameOver();
+        }
+
+        if (other.gameObject.tag == "walls")
+        {
+            isJumping = false;
         }
     }
 	
@@ -124,7 +134,7 @@ public class Player : MonoBehaviour {
 
             player.velocity = new Vector3(xVelocity, player.velocity.y, 0);
 
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetKeyDown(KeyCode.Space) && isJumping == false)
             {
                 isJumping = true;
                 player.AddForce(Vector3.up * 3000);
@@ -268,13 +278,13 @@ public class Player : MonoBehaviour {
     {
         
         GameObject temp = Instantiate(bullet, bulletSpawn.transform.position, bulletSpawn.transform.rotation);
-        temp.GetComponent<Rigidbody>().AddRelativeForce(Vector3.forward * 1500 * power);
+        temp.GetComponent<Rigidbody>().AddRelativeForce(Vector3.forward * 8000 * power);
     }
 
     void ShootingGrenade()
     {
         
         GameObject temp = Instantiate(grenade, bulletSpawn.transform.position, bulletSpawn.transform.rotation);
-        temp.GetComponent<Rigidbody>().AddRelativeForce(Vector3.forward * 15000 * power);
+        temp.GetComponent<Rigidbody>().AddRelativeForce(Vector3.forward * 12000 * power);
     }
 }

@@ -41,9 +41,10 @@ GameObject:
   - component: {fileID: 4557440967471408}
   - component: {fileID: 198512484073680196}
   - component: {fileID: 199995719536036756}
+  - component: {fileID: 114887795765527062}
   m_Layer: 0
   m_Name: Particle System
-  m_TagString: Untagged
+  m_TagString: particle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -144,6 +145,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   explosion: {fileID: 1845009557427330}
+--- !u!114 &114887795765527062
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1845009557427330}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8af93aba98e58234299e97add4cd5c07, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!135 &135198933876285664
 SphereCollider:
   m_ObjectHideFlags: 1
@@ -3795,7 +3807,7 @@ ParticleSystem:
     maxCollisionShapes: 256
     quality: 0
     voxelSize: 0.5
-    collisionMessages: 0
+    collisionMessages: 1
     collidesWithDynamic: 1
     interiorCollisions: 0
   TriggerModule:

@@ -8,6 +8,7 @@ TagManager:
   - bullet
   - walls
   - grenade
+  - particle
   layers:
   - Default
   - TransparentFX
